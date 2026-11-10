@@ -1,25 +1,87 @@
 {
   "city": "薩摩川内市",
   "areaCode": "46215",
-  "updated": "2026-11-09",
+  "updated": "2026-11-10",
   "population": {
     "title": "総人口と世帯数（国勢調査）",
-    "source": "統計さつませんだい 令和7年版「年次別人口の推移」",
+    "source": "e-Stat 社会・人口統計体系 市区町村データ「A 人口・世帯」",
     "years": [
-      { "year": 2000, "label": "平成12年", "total": 105464, "households": 41648 },
-      { "year": 2005, "label": "平成17年", "total": 102370, "households": 41387 },
-      { "year": 2010, "label": "平成22年", "total": 99589, "households": 41449 },
-      { "year": 2015, "label": "平成27年", "total": 96076, "households": 40686 },
-      { "year": 2020, "label": "令和2年", "total": 92403, "households": 40995 }
+      {
+        "year": 2000,
+        "label": "平成12年",
+        "total": 105464,
+        "households": 41518
+      },
+      {
+        "year": 2005,
+        "label": "平成17年",
+        "total": 102370,
+        "households": 41210
+      },
+      {
+        "year": 2010,
+        "label": "平成22年",
+        "total": 99589,
+        "households": 41314
+      },
+      {
+        "year": 2015,
+        "label": "平成27年",
+        "total": 96076,
+        "households": 40537
+      },
+      {
+        "year": 2020,
+        "label": "令和2年",
+        "total": 92403,
+        "households": 40842
+      }
     ]
   },
   "age": {
     "title": "年齢3区分別人口（国勢調査）",
-    "source": "統計さつませんだい 令和7年版「年齢別（5歳階級）人口」を3区分に合計",
+    "source": "e-Stat 社会・人口統計体系 市区町村データ「A 人口・世帯」",
     "years": [
-      { "year": 2010, "label": "平成22年", "child": 14382, "working": 58030, "elderly": 26896, "unknown": 281 },
-      { "year": 2015, "label": "平成27年", "child": 13730, "working": 53842, "elderly": 28303, "unknown": 201 },
-      { "year": 2020, "label": "令和2年", "child": 12750, "working": 49189, "elderly": 29697, "unknown": 767 }
+      {
+        "year": 2000,
+        "label": "平成12年",
+        "child": 17166,
+        "working": 62712,
+        "elderly": 25576,
+        "unknown": 10
+      },
+      {
+        "year": 2005,
+        "label": "平成17年",
+        "child": 15492,
+        "working": 60263,
+        "elderly": 26530,
+        "unknown": 85
+      },
+      {
+        "year": 2010,
+        "label": "平成22年",
+        "child": 14382,
+        "working": 58030,
+        "elderly": 26896,
+        "unknown": 281
+      },
+      {
+        "year": 2015,
+        "label": "平成27年",
+        "child": 13730,
+        "working": 53842,
+        "elderly": 28303,
+        "unknown": 201
+      },
+      {
+        "year": 2020,
+        "label": "令和2年",
+        "child": 12750,
+        "working": 49189,
+        "elderly": 29697,
+        "unknown": 767
+      }
     ]
   },
   "industry": {
@@ -28,25 +90,84 @@
     "year": 2020,
     "total": 42755,
     "sectors": [
-      { "key": "primary", "name": "第1次産業", "hint": "農業・林業・漁業", "count": 2365 },
-      { "key": "secondary", "name": "第2次産業", "hint": "ものづくり・建設", "count": 12395 },
-      { "key": "tertiary", "name": "第3次産業", "hint": "お店・病院・運輸・サービスなど", "count": 27792 },
-      { "key": "unknown", "name": "分類不能", "hint": "", "count": 203 }
+      {
+        "key": "primary",
+        "name": "第1次産業",
+        "hint": "農業・林業・漁業",
+        "count": 2365
+      },
+      {
+        "key": "secondary",
+        "name": "第2次産業",
+        "hint": "ものづくり・建設",
+        "count": 12395
+      },
+      {
+        "key": "tertiary",
+        "name": "第3次産業",
+        "hint": "お店・病院・運輸・サービスなど",
+        "count": 27792
+      },
+      {
+        "key": "unknown",
+        "name": "分類不能",
+        "hint": "",
+        "count": 203
+      }
     ],
     "major": [
-      { "name": "製造業", "count": 7914 },
-      { "name": "医療・福祉", "count": 7466 },
-      { "name": "卸売業・小売業", "count": 5600 },
-      { "name": "建設業", "count": 4453 },
-      { "name": "公務", "count": 2137 },
-      { "name": "宿泊業・飲食サービス業", "count": 2115 },
-      { "name": "農業・林業", "count": 2088 },
-      { "name": "教育・学習支援業", "count": 1888 },
-      { "name": "運輸業・郵便業", "count": 1551 },
-      { "name": "電気・ガス・熱供給・水道業", "count": 796 },
-      { "name": "金融業・保険業", "count": 591 },
-      { "name": "漁業", "count": 277 },
-      { "name": "情報通信業", "count": 176 }
+      {
+        "name": "製造業",
+        "count": 7914
+      },
+      {
+        "name": "医療・福祉",
+        "count": 7466
+      },
+      {
+        "name": "卸売業・小売業",
+        "count": 5600
+      },
+      {
+        "name": "建設業",
+        "count": 4453
+      },
+      {
+        "name": "公務",
+        "count": 2137
+      },
+      {
+        "name": "宿泊業・飲食サービス業",
+        "count": 2115
+      },
+      {
+        "name": "農業・林業",
+        "count": 2088
+      },
+      {
+        "name": "教育・学習支援業",
+        "count": 1888
+      },
+      {
+        "name": "運輸業・郵便業",
+        "count": 1551
+      },
+      {
+        "name": "電気・ガス・熱供給・水道業",
+        "count": 796
+      },
+      {
+        "name": "金融業・保険業",
+        "count": 591
+      },
+      {
+        "name": "漁業",
+        "count": 277
+      },
+      {
+        "name": "情報通信業",
+        "count": 176
+      }
     ]
   },
   "movement": {
@@ -59,19 +180,55 @@
     "moveOut": 3531
   },
   "facts": [
-    { "key": "area", "label": "市の面積", "value": 682.92, "unit": "km²", "source": "統計さつませんだい 令和7年版「市域の変遷」" },
-    { "key": "broiler", "label": "ブロイラー（肉用のにわとり）の年間生産", "value": 10127578, "unit": "羽", "yearLabel": "令和6年", "source": "統計さつませんだい 令和7年版「ブロイラー経営状況」" },
-    { "key": "tourists", "label": "観光で訪れた人（延べ）", "value": 3052763, "unit": "人", "yearLabel": "令和6年", "source": "統計さつませんだい 令和7年版「観光」" },
-    { "key": "tourists_koshiki", "label": "そのうち甑島を訪れた人", "value": 60110, "unit": "人", "yearLabel": "令和6年", "source": "統計さつませんだい 令和7年版「観光」" }
+    {
+      "key": "area",
+      "label": "市の面積",
+      "value": 682.92,
+      "unit": "km²",
+      "source": "統計さつませんだい 令和7年版「市域の変遷」"
+    },
+    {
+      "key": "broiler",
+      "label": "ブロイラー（肉用のにわとり）の年間生産",
+      "value": 10127578,
+      "unit": "羽",
+      "yearLabel": "令和6年",
+      "source": "統計さつませんだい 令和7年版「ブロイラー経営状況」"
+    },
+    {
+      "key": "tourists",
+      "label": "観光で訪れた人（延べ）",
+      "value": 3052763,
+      "unit": "人",
+      "yearLabel": "令和6年",
+      "source": "統計さつませんだい 令和7年版「観光」"
+    },
+    {
+      "key": "tourists_koshiki",
+      "label": "そのうち甑島を訪れた人",
+      "value": 60110,
+      "unit": "人",
+      "yearLabel": "令和6年",
+      "source": "統計さつませんだい 令和7年版「観光」"
+    }
   ],
   "islands": {
     "title": "甑島の地域別人口（住民基本台帳）",
     "source": "統計さつませんだい 令和7年版「地区別人口」",
     "dateLabel": "令和7年10月1日",
     "areas": [
-      { "name": "上甑地域", "count": 875 },
-      { "name": "下甑地域", "count": 1391 },
-      { "name": "鹿島地域", "count": 292 }
+      {
+        "name": "上甑地域",
+        "count": 875
+      },
+      {
+        "name": "下甑地域",
+        "count": 1391
+      },
+      {
+        "name": "鹿島地域",
+        "count": 292
+      }
     ]
   },
   "symbols": {
@@ -79,9 +236,21 @@
     "flower": "カノコユリ"
   },
   "sources": [
-    { "title": "統計さつませんだい 令和7年版（薩摩川内市）", "url": "https://www.city.satsumasendai.lg.jp/material/files/group/5/R7toukeisatsumasendai.pdf" },
-    { "title": "統計さつませんだい 令和6年版（薩摩川内市）", "url": "https://www.city.satsumasendai.lg.jp/material/files/group/9/R6_toukeisatsumasendai.pdf" },
-    { "title": "統計さつませんだい 令和5年版（薩摩川内市）", "url": "https://www.city.satsumasendai.lg.jp/material/files/group/9/R5_tokeisatsumasendai.pdf" },
-    { "title": "e-Stat 社会・人口統計体系 市区町村データ「A 人口・世帯」", "url": "https://www.e-stat.go.jp/" }
+    {
+      "title": "統計さつませんだい 令和7年版（薩摩川内市）",
+      "url": "https://www.city.satsumasendai.lg.jp/material/files/group/5/R7toukeisatsumasendai.pdf"
+    },
+    {
+      "title": "統計さつませんだい 令和6年版（薩摩川内市）",
+      "url": "https://www.city.satsumasendai.lg.jp/material/files/group/9/R6_toukeisatsumasendai.pdf"
+    },
+    {
+      "title": "統計さつませんだい 令和5年版（薩摩川内市）",
+      "url": "https://www.city.satsumasendai.lg.jp/material/files/group/9/R5_tokeisatsumasendai.pdf"
+    },
+    {
+      "title": "e-Stat 社会・人口統計体系 市区町村データ「A 人口・世帯」",
+      "url": "https://www.e-stat.go.jp/"
+    }
   ]
 }
