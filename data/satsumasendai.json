@@ -10,31 +10,31 @@
         "year": 2000,
         "label": "平成12年",
         "total": 105464,
-        "households": 41518
+        "households": 41648
       },
       {
         "year": 2005,
         "label": "平成17年",
         "total": 102370,
-        "households": 41210
+        "households": 41387
       },
       {
         "year": 2010,
         "label": "平成22年",
         "total": 99589,
-        "households": 41314
+        "households": 41449
       },
       {
         "year": 2015,
         "label": "平成27年",
         "total": 96076,
-        "households": 40537
+        "households": 40686
       },
       {
         "year": 2020,
         "label": "令和2年",
         "total": 92403,
-        "households": 40842
+        "households": 40995
       }
     ]
   },

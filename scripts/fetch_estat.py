@@ -55,7 +55,7 @@ INDICATORS = {
     "child": ["15歳未満人口"],
     "working": ["15~64歳人口"],
     "elderly": ["65歳以上人口"],
-    "households": ["一般世帯数", "世帯数"],
+    "households": ["世帯数"],   # 一般世帯数ではなく、すべての世帯の数（市の統計書と同じ）
 }
 EXCLUDE_WORDS = ["男", "女", "割合", "日本人", "外国人", "比率", "%"]
 
@@ -85,14 +85,27 @@ def pick_indicators(class_objs):
             for c in as_list(obj.get("CLASS", [])):
                 names[c["@code"]] = c["@name"]
 
+    def plain(name):
+        # 「A7101_世帯数」のような名前から、先頭のコード部分をとる
+        n = normalize(name)
+        return n.split("_", 1)[1] if "_" in n else n
+
     found = {}
     for key, words in INDICATORS.items():
         for word in words:  # 先に書いた言葉を優先する
+            w = normalize(word)
+            # 1回目：名前がぴったり同じものを探す（「世帯数」と「一般世帯数」を取りちがえないため）
             for code, name in names.items():
-                n = normalize(name)
-                if normalize(word) in n and not any(w in n for w in EXCLUDE_WORDS):
+                if plain(name) == w:
                     found[key] = code
                     break
+            # 2回目：見つからなければ、言葉をふくむものを探す
+            if key not in found:
+                for code, name in names.items():
+                    n = normalize(name)
+                    if w in n and not any(x in n for x in EXCLUDE_WORDS) and "一般" not in n and "施設" not in n:
+                        found[key] = code
+                        break
             if key in found:
                 break
     return found, names
