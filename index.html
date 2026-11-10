@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1F3F9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)">
+<title>数字で見る薩摩川内市</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1F3F9;
+    --surface: #FFFFFF;
+    --field: #F1F3F9;
+    --ink: #1A1C24;
+    --sub: #6B7080;
+    --line: #E3E6EF;
+    --accent: #4C6EF5;
+    --on-accent: #FFFFFF;
+    --good: #12B886;
+    --bad: #E03131;
+    /* グラフの色 */
+    --c-child: #FCC419;
+    --c-work: #4C6EF5;
+    --c-old: #FF8787;
+    --c-p1: #20C997;
+    --c-p2: #4C6EF5;
+    --c-p3: #9775FA;
+    --c-na: #ADB5BD;
+    font-size: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121418;
+      --surface: #1C1F26;
+      --field: #262A33;
+      --ink: #F1F3F9;
+      --sub: #9AA0B0;
+      --line: #2A2E38;
+      --accent: #748FFC;
+      --on-accent: #0E1430;
+      --good: #38D9A9;
+      --bad: #FF6B6B;
+    }
+  }
+  /* 「大きく表示」：教室のスクリーンに映すとき用 */
+  :root.big { font-size: 20px; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", "Meiryo", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 20px 20px calc(40px + env(safe-area-inset-bottom));
+  }
+
+  /* ヘッダー */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .toggle {
+    border: none;
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: .875rem;
+    font-weight: 700;
+  }
+  .toggle[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+  .source-mini { color: var(--sub); font-size: .8125rem; }
+
+  .hero {
+    background: var(--surface);
+    border-radius: 32px;
+    padding: 28px 24px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(1.9rem, 7vw, 2.75rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+  }
+  .hero p { margin: 10px 0 0; color: var(--sub); }
+  .toc {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  @media (min-width: 640px) { .toc { grid-template-columns: 1fr 1fr; } }
+  .toc a {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: var(--field);
+    border-radius: 16px;
+    padding: 10px 14px;
+    color: inherit;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .toc .no {
+    flex-shrink: 0;
+    width: 1.9em;
+    height: 1.9em;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: .875rem;
+  }
+
+  /* 各章 */
+  section.chapter {
+    background: var(--surface);
+    border-radius: 28px;
+    padding: 28px 24px;
+    margin-top: 16px;
+    scroll-margin-top: 16px;
+  }
+  .chapter-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 6px; }
+  .chapter-head .no {
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--on-accent);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    font-size: 1.125rem;
+    margin-top: 2px;
+  }
+  h2 { margin: 0; font-size: clamp(1.25rem, 5.4vw, 1.5rem); font-weight: 900; line-height: 1.35; }
+  .finding {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 14px 0 18px;
+  }
+  .finding strong { color: var(--accent); font-weight: 900; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 18px 0; }
+  .stat { background: var(--field); border-radius: 18px; padding: 14px 16px; }
+  .stat .k { color: var(--sub); font-size: .8125rem; font-weight: 700; }
+  .stat .v { font-size: 1.75rem; font-weight: 900; line-height: 1.25; font-variant-numeric: tabular-nums; }
+  .stat .v small { font-size: .875rem; font-weight: 700; margin-left: 2px; }
+  .stat .n { color: var(--sub); font-size: .8125rem; }
+
+  figure { margin: 0; }
+  .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .chart text { font-family: inherit; }
+  figcaption { color: var(--sub); font-size: .8125rem; margin-top: 8px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 4px 0 12px; font-size: .875rem; font-weight: 700; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; flex-shrink: 0; }
+  .legend.list { display: grid; gap: 4px; }
+  .legend.list span { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .legend.list i { transform: translateY(1px); }
+  .legend .hint { color: var(--sub); font-weight: 500; }
+  .vs { margin: 10px 0; }
+  .vs-label { font-weight: 700; font-size: .9375rem; }
+  .vs-row { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+  .vs-bar { height: 26px; border-radius: 6px; }
+  .vs-row b { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  .think {
+    margin-top: 20px;
+    border-radius: 18px;
+    padding: 14px 16px;
+    background: var(--field);
+    border-left: 6px solid var(--c-child);
+  }
+  .think b { display: block; font-size: .875rem; margin-bottom: 2px; }
+
+  /* クイズ */
+  .quiz { margin: 18px 0; }
+  .quiz-q { font-weight: 900; font-size: 1.125rem; margin: 0 0 10px; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .choice {
+    border: 2px solid transparent;
+    background: var(--field);
+    border-radius: 16px;
+    padding: 14px 12px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .choice.correct { border-color: var(--good); }
+  .choice.wrong { border-color: var(--bad); opacity: .7; }
+  .quiz-result { min-height: 1.7em; font-weight: 700; margin: 10px 0 0; }
+  .reveal[hidden] { display: none; }
+
+  /* おもしろい数字 */
+  .facts { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .fact { background: var(--field); border-radius: 20px; padding: 18px; }
+  .fact .k { color: var(--sub); font-size: .875rem; font-weight: 700; }
+  .fact .v { font-size: 2rem; font-weight: 900; line-height: 1.2; margin: 4px 0; font-variant-numeric: tabular-nums; }
+  .fact .v small { font-size: 1rem; margin-left: 2px; }
+  .fact .compare { font-weight: 700; }
+  .fact .compare strong { color: var(--accent); font-size: 1.25rem; }
+  .fact .y { color: var(--sub); font-size: .75rem; margin-top: 6px; }
+
+  .sources { margin-top: 16px; background: var(--surface); border-radius: 24px; padding: 20px 24px; color: var(--sub); font-size: .8125rem; }
+  .sources h2 { font-size: 1rem; color: var(--ink); margin-bottom: 6px; }
+  .sources ul { margin: 0; padding-left: 1.2em; }
+  .sources a { color: var(--accent); }
+
+  .error {
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 24px;
+    border-left: 6px solid var(--bad);
+  }
+  .error code { background: var(--field); padding: 1px 6px; border-radius: 6px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .grow { transform-origin: bottom; animation: grow .7s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes grow { from { transform: scaleY(0); } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <span class="source-mini" id="updated"></span>
+    <button class="toggle" id="bigBtn" type="button" aria-pressed="false">大きく表示</button>
+  </div>
+
+  <header class="hero">
+    <h1>数字で見る薩摩川内市</h1>
+    <p>国勢調査と市の統計書の数字から、わたしたちのまちの今を調べます。</p>
+    <ol class="toc">
+      <li><a href="#ch1"><span class="no">1</span>人口のうつりかわり</a></li>
+      <li><a href="#ch2"><span class="no">2</span>子ども・大人・お年寄り</a></li>
+      <li><a href="#ch3"><span class="no">3</span>どんな仕事をしている？</a></li>
+      <li><a href="#ch4"><span class="no">4</span>1年間の人の動き</a></li>
+      <li><a href="#ch5"><span class="no">5</span>びっくり数字</a></li>
+    </ol>
+  </header>
+
+  <main id="app">
+    <p class="source-mini">データを読み込んでいます…</p>
+  </main>
+</div>
+
+<script>
+(() => {
+  const DATA_URL = "data/satsumasendai.json";
+
+  // ===== 便利な関数 =====
+  const fmt = n => Number(n).toLocaleString("ja-JP");
+  const pct = (a, b) => (a / b * 100);
+  const round1 = n => Math.round(n * 10) / 10;
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  // 「約N人に1人」の言い方
+  const oneIn = ratio => `約${Math.round(1 / ratio)}人に1人`;
+
+  // ===== グラフ（SVGで手描き） =====
+  // グラフを描く幅（画面に合わせる。文字の大きさは実際のpxになる）
+  let W = 640;
+  const measureWidth = () => {
+    const app = document.getElementById("app");
+    W = Math.round(Math.max(280, Math.min(780, app.clientWidth - 48)));
+  };
+
+  // 1. 縦の棒グラフ（人口）
+  function barChart(rows, { valueKey, labelKey, color, unit = "人" }) {
+    const H = 280, side = 4, top = 30, bottom = 44;
+    const max = Math.max(...rows.map(r => r[valueKey]));
+    const n = rows.length;
+    const slot = (W - side * 2) / n;
+    const bw = Math.min(72, slot * 0.64);
+    const small = slot < 70;
+    const y = v => top + (H - top - bottom) * (1 - v / max);
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(rows.map(r => r[labelKey] + " " + fmt(r[valueKey]) + unit).join("、"))}">`;
+    s += `<line x1="${side}" x2="${W - side}" y1="${H - bottom}" y2="${H - bottom}" stroke="var(--line)" stroke-width="2"/>`;
+    rows.forEach((r, i) => {
+      const cx = side + slot * i + slot / 2;
+      const yy = y(r[valueKey]);
+      const last = i === n - 1;
+      s += `<rect class="grow" style="animation-delay:${i * 70}ms" x="${cx - bw / 2}" y="${yy}" width="${bw}" height="${H - bottom - yy}" rx="8" fill="${color}" opacity="${last ? 1 : .55}"/>`;
+      s += `<text x="${cx}" y="${yy - 9}" text-anchor="middle" font-size="${small ? 12 : 15}" font-weight="${last ? 900 : 700}" fill="var(--ink)">${fmt(r[valueKey])}</text>`;
+      s += `<text x="${cx}" y="${H - bottom + 20}" text-anchor="middle" font-size="${small ? 12 : 14}" fill="var(--sub)">${esc(r[labelKey])}</text>`;
+      s += `<text x="${cx}" y="${H - bottom + 37}" text-anchor="middle" font-size="11" fill="var(--sub)">${r.year}年</text>`;
+    });
+    return s + "</svg>";
+  }
+
+  // 2. 100%の横帯グラフ（年齢・産業）
+  function stackRows(rows, parts) {
+    const rowH = 40, gap = 14, labelW = W < 420 ? 64 : 96, top = 2;
+    const fs = W < 420 ? 12 : 14;
+    const H = top + rows.length * (rowH + gap) - gap + 2;
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(rows.map(r => r.label + "：" + parts.map(p => p.name + " " + round1(pct(r[p.key], r._total)) + "%").join("、")).join("。"))}">`;
+    rows.forEach((r, i) => {
+      const yy = top + i * (rowH + gap);
+      s += `<text x="0" y="${yy + rowH / 2 + 5}" font-size="${fs}" font-weight="700" fill="var(--ink)">${esc(r.label)}</text>`;
+      let x = labelW;
+      const span = W - labelW;
+      parts.forEach(p => {
+        const w = span * r[p.key] / r._total;
+        if (w <= 0) return;
+        s += `<rect x="${x}" y="${yy}" width="${Math.max(0, w - 2)}" height="${rowH}" rx="6" fill="${p.color}"/>`;
+        if (w > 44) {
+          s += `<text x="${x + w / 2 - 1}" y="${yy + rowH / 2 + 5}" text-anchor="middle" font-size="${fs}" font-weight="900" fill="${p.textColor || "#1A1C24"}">${round1(pct(r[p.key], r._total))}%</text>`;
+        }
+        x += w;
+      });
+    });
+    return s + "</svg>";
+  }
+
+  // 3. 横の棒グラフ（仕事のランキング）：名前を棒の上に置く
+  function rankChart(items, highlight) {
+    const rowH = 46, valW = 54;
+    const H = items.length * rowH;
+    const max = Math.max(...items.map(i => i.count));
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(items.map(i => i.name + " " + fmt(i.count) + "人").join("、"))}">`;
+    items.forEach((it, i) => {
+      const yy = i * rowH;
+      const w = (W - valW) * it.count / max;
+      const hot = it.name === highlight;
+      s += `<text x="0" y="${yy + 15}" font-size="14" font-weight="${hot ? 900 : 500}" fill="var(--ink)">${i + 1}. ${esc(it.name)}</text>`;
+      s += `<rect x="0" y="${yy + 22}" width="${Math.max(2, w)}" height="16" rx="5" fill="${hot ? css("--accent") : css("--c-p3")}" opacity="${hot ? 1 : .55}"/>`;
+      s += `<text x="${w + 6}" y="${yy + 35}" font-size="13" font-weight="700" fill="var(--ink)">${fmt(it.count)}</text>`;
+    });
+    return s + "</svg>";
+  }
+
+  // 4. 2本の比べっこ棒
+  function versus(a, b) {
+    const max = Math.max(a.value, b.value);
+    const row = o => `
+      <div class="vs">
+        <div class="vs-label">${esc(o.label)}</div>
+        <div class="vs-row">
+          <span class="vs-bar" style="background:${o.color};width:${o.value / max * 72}%"></span>
+          <b>${fmt(o.value)}人</b>
+        </div>
+      </div>`;
+    return row(a) + row(b);
+  }
+
+  // ===== 各章を組み立てる =====
+  function chapterHead(no, title) {
+    return `<div class="chapter-head"><span class="no">${no}</span><h2>${esc(title)}</h2></div>`;
+  }
+
+  function ch1(d) {
+    const ys = d.population.years;
+    const first = ys[0], last = ys[ys.length - 1];
+    const diff = first.total - last.total;
+    const perHouseFirst = first.total / first.households;
+    const perHouseLast = last.total / last.households;
+    return `
+    <section class="chapter" id="ch1">
+      ${chapterHead(1, "人口のうつりかわり")}
+      <p class="finding">${esc(first.label)}から${esc(last.label)}までの${last.year - first.year}年間で、人口は<strong>${fmt(diff)}人</strong>（約${Math.round(pct(diff, first.total))}%）減りました。</p>
+      <figure class="chart">
+        ${barChart(ys, { valueKey: "total", labelKey: "label", color: css("--accent") })}
+        <figcaption>${esc(d.population.title)}　出典：${esc(d.population.source)}</figcaption>
+      </figure>
+      <div class="stats">
+        <div class="stat"><div class="k">${esc(last.label)}の人口</div><div class="v">${fmt(last.total)}<small>人</small></div></div>
+        <div class="stat"><div class="k">${esc(last.label)}の世帯数</div><div class="v">${fmt(last.households)}<small>世帯</small></div></div>
+        <div class="stat"><div class="k">1世帯あたりの人数</div><div class="v">${perHouseLast.toFixed(2)}<small>人</small></div><div class="n">${esc(first.label)}は${perHouseFirst.toFixed(2)}人</div></div>
+      </div>
+      <div class="think"><b>考えてみよう</b>人口は減っているのに、世帯の数はあまり変わっていません。どうしてだと思いますか？</div>
+    </section>`;
+  }
+
+  function ch2(d) {
+    const rows = d.age.years.map(r => ({ ...r, _total: r.child + r.working + r.elderly }));
+    const last = rows[rows.length - 1], first = rows[0];
+    const parts = [
+      { key: "child", name: "子ども（0〜14歳）", color: css("--c-child") },
+      { key: "working", name: "大人（15〜64歳）", color: css("--c-work"), textColor: "#FFFFFF" },
+      { key: "elderly", name: "お年寄り（65歳以上）", color: css("--c-old") }
+    ];
+    const oldRatio = last.elderly / last._total;
+    const childRatio = last.child / last._total;
+    return `
+    <section class="chapter" id="ch2">
+      ${chapterHead(2, "子ども・大人・お年寄り")}
+      <p class="finding">${esc(last.label)}には、65歳以上の人が<strong>${oneIn(oldRatio)}</strong>（${round1(oldRatio * 100)}%）になりました。子どもは${oneIn(childRatio)}です。</p>
+      <div class="legend">${parts.map(p => `<span><i style="background:${p.color}"></i>${esc(p.name)}</span>`).join("")}</div>
+      <figure class="chart">
+        ${stackRows(rows, parts)}
+        <figcaption>${esc(d.age.title)}。割合は年齢がわからない人を除いて計算。出典：${esc(d.age.source)}</figcaption>
+      </figure>
+      <div class="stats">
+        <div class="stat"><div class="k">子ども（0〜14歳）</div><div class="v">${fmt(last.child)}<small>人</small></div><div class="n">${esc(first.label)}から${fmt(first.child - last.child)}人減</div></div>
+        <div class="stat"><div class="k">お年寄り（65歳以上）</div><div class="v">${fmt(last.elderly)}<small>人</small></div><div class="n">${esc(first.label)}から${fmt(last.elderly - first.elderly)}人増</div></div>
+      </div>
+      <div class="think"><b>考えてみよう</b>お年寄りが増えて子どもが減ると、まちのくらしにどんな変化がありそうですか？　バスやお店、学校で考えてみましょう。</div>
+    </section>`;
+  }
+
+  function ch3(d) {
+    const ind = d.industry;
+    const sectorColor = { primary: css("--c-p1"), secondary: css("--c-p2"), tertiary: css("--c-p3"), unknown: css("--c-na") };
+    const sectorText = { secondary: "#FFFFFF", tertiary: "#FFFFFF" };
+    const row = { label: `${ind.year}年`, _total: ind.total };
+    ind.sectors.forEach(s => row[s.key] = s.count);
+    const parts = ind.sectors.filter(s => s.key !== "unknown").concat(ind.sectors.filter(s => s.key === "unknown"))
+      .map(s => ({ key: s.key, name: s.name, color: sectorColor[s.key], textColor: sectorText[s.key] }));
+    const ranking = ind.major.slice().sort((a, b) => b.count - a.count);
+    const top = ranking[0];
+    // クイズの選択肢：1位・2位・3位と、第1次産業の代表
+    const choices = [ranking[0], ranking[1], ranking[2], ranking.find(r => r.name.startsWith("農業"))].filter(Boolean);
+    const shuffled = choices.map((c, i) => ({ c, k: (i * 7 + 3) % 5 })).sort((a, b) => a.k - b.k).map(x => x.c);
+    return `
+    <section class="chapter" id="ch3">
+      ${chapterHead(3, "どんな仕事をしている？")}
+      <p class="finding">働いている${fmt(ind.total)}人のうち、<strong>約${Math.round(pct(ind.sectors.find(s => s.key === "tertiary").count, ind.total))}%</strong>がお店・病院・運輸などの「第3次産業」で働いています。</p>
+      <div class="legend list">${ind.sectors.map(s => `<span><i style="background:${sectorColor[s.key]}"></i>${esc(s.name)}${s.hint ? `<span class="hint">${esc(s.hint)}</span>` : ""}</span>`).join("")}</div>
+      <figure class="chart">${stackRows([row], parts)}</figure>
+
+      <div class="quiz" id="quiz">
+        <p class="quiz-q">クイズ：いちばん多くの人が働いている仕事はどれ？</p>
+        <div class="choices">
+          ${shuffled.map(c => `<button class="choice" type="button" data-name="${esc(c.name)}">${esc(c.name)}</button>`).join("")}
+        </div>
+        <p class="quiz-result" id="quizResult" aria-live="polite"></p>
+      </div>
+      <div class="reveal" id="ranking" hidden>
+        <figure class="chart">
+          ${rankChart(ranking.slice(0, 10), top.name)}
+          <figcaption>${esc(ind.title)}、上位10。出典：${esc(ind.source)}</figcaption>
+        </figure>
+      </div>
+      <div class="think"><b>考えてみよう</b>「製造業」や「電気・ガス」で働く人が多いのは、まちにどんな工場や施設があるからでしょう？　地図で探してみましょう。</div>
+    </section>`;
+  }
+
+  function ch4(d) {
+    const m = d.movement;
+    const natural = m.births - m.deaths;
+    const social = m.moveIn - m.moveOut;
+    const total = natural + social;
+    const perDay = round1(m.births / 365);
+    return `
+    <section class="chapter" id="ch4">
+      ${chapterHead(4, "1年間の人の動き")}
+      <p class="finding">${esc(m.yearLabel)}の1年間で、生まれた人と引っ越してきた人を合わせても、差し引き<strong>${fmt(Math.abs(total))}人</strong>${total < 0 ? "減" : "増"}になりました。</p>
+      <h3 style="margin:18px 0 4px;font-size:1.0625rem">生まれた人と亡くなった人</h3>
+      ${versus({ label: "生まれた人", value: m.births, color: css("--c-child") }, { label: "亡くなった人", value: m.deaths, color: css("--c-na") })}
+      <h3 style="margin:18px 0 4px;font-size:1.0625rem">引っ越してきた人と出ていった人</h3>
+      ${versus({ label: "引っ越してきた人", value: m.moveIn, color: css("--c-p1") }, { label: "出ていった人", value: m.moveOut, color: css("--c-old") })}
+      <div class="stats">
+        <div class="stat"><div class="k">1日に生まれる赤ちゃん</div><div class="v">約${perDay}<small>人</small></div><div class="n">${fmt(m.births)}人 ÷ 365日</div></div>
+        <div class="stat"><div class="k">生まれた − 亡くなった</div><div class="v">${natural < 0 ? "−" : "+"}${fmt(Math.abs(natural))}<small>人</small></div></div>
+        <div class="stat"><div class="k">来た − 出ていった</div><div class="v">${social < 0 ? "−" : "+"}${fmt(Math.abs(social))}<small>人</small></div></div>
+      </div>
+      <figcaption>出典：${esc(m.source)}</figcaption>
+      <div class="think"><b>考えてみよう</b>出ていく人は、どんな年れいの人が多いと思いますか？　その理由も考えてみましょう。</div>
+    </section>`;
+  }
+
+  function ch5(d) {
+    const pop = d.population.years[d.population.years.length - 1];
+    const f = Object.fromEntries(d.facts.map(x => [x.key, x]));
+    const isl = d.islands;
+    const islTotal = isl.areas.reduce((a, b) => a + b.count, 0);
+    const cards = [];
+    if (f.area) cards.push(`
+      <div class="fact"><div class="k">${esc(f.area.label)}</div><div class="v">${f.area.value}<small>${esc(f.area.unit)}</small></div>
+      <div class="compare">1km²に<strong>約${Math.round(pop.total / f.area.value)}人</strong>が住んでいる計算</div>
+      <div class="y">人口は${esc(pop.label)}国勢調査の${fmt(pop.total)}人で計算</div></div>`);
+    if (f.broiler) cards.push(`
+      <div class="fact"><div class="k">${esc(f.broiler.label)}</div><div class="v">${fmt(f.broiler.value)}<small>${esc(f.broiler.unit)}</small></div>
+      <div class="compare">市の人口の<strong>約${Math.round(f.broiler.value / pop.total)}倍</strong></div>
+      <div class="y">${esc(f.broiler.yearLabel)}　出典：${esc(f.broiler.source)}</div></div>`);
+    if (f.tourists) cards.push(`
+      <div class="fact"><div class="k">${esc(f.tourists.label)}</div><div class="v">${fmt(f.tourists.value)}<small>${esc(f.tourists.unit)}</small></div>
+      <div class="compare">市民1人あたり<strong>約${Math.round(f.tourists.value / pop.total)}人</strong>が来た計算${f.tourists_koshiki ? `（甑島へは${fmt(f.tourists_koshiki.value)}人）` : ""}</div>
+      <div class="y">${esc(f.tourists.yearLabel)}　出典：${esc(f.tourists.source)}</div></div>`);
+    if (isl) cards.push(`
+      <div class="fact"><div class="k">甑島に住んでいる人</div><div class="v">${fmt(islTotal)}<small>人</small></div>
+      <div class="compare">${isl.areas.map(a => `${esc(a.name)} ${fmt(a.count)}人`).join("、")}</div>
+      <div class="y">${esc(isl.dateLabel)}　出典：${esc(isl.source)}</div></div>`);
+    if (d.symbols) cards.push(`
+      <div class="fact"><div class="k">市のシンボル</div><div class="v" style="font-size:1.5rem">${esc(d.symbols.flower)}</div>
+      <div class="compare">市の花。市の木は${esc(d.symbols.tree)}</div></div>`);
+    return `
+    <section class="chapter" id="ch5">
+      ${chapterHead(5, "びっくり数字")}
+      <p class="finding">大きな数字は、身近な数字と<strong>くらべる</strong>とイメージしやすくなります。</p>
+      <div class="facts">${cards.join("")}</div>
+      <div class="think"><b>考えてみよう</b>ほかに、どんな数字を「市の人口の何倍」とくらべると面白いでしょう？</div>
+    </section>`;
+  }
+
+  function sourcesBlock(d) {
+    return `
+    <section class="sources" aria-labelledby="srcTitle">
+      <h2 id="srcTitle">データの出典</h2>
+      <ul>${d.sources.map(s => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join("")}</ul>
+      <p style="margin:8px 0 0">割合や「約○倍」は、出典の数字からこのページで計算しています。</p>
+    </section>`;
+  }
+
+  // ===== クイズの動き =====
+  function setupQuiz(d) {
+    const answer = d.industry.major.slice().sort((a, b) => b.count - a.count)[0].name;
+    const box = document.getElementById("quiz");
+    box.querySelectorAll(".choice").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const ok = btn.dataset.name === answer;
+        box.querySelectorAll(".choice").forEach(b => {
+          b.disabled = true;
+          if (b.dataset.name === answer) b.classList.add("correct");
+        });
+        if (!ok) btn.classList.add("wrong");
+        document.getElementById("quizResult").textContent = ok
+          ? `正解！ いちばん多いのは「${answer}」です。`
+          : `ざんねん！ 答えは「${answer}」です。`;
+        document.getElementById("ranking").hidden = false;
+      });
+    });
+  }
+
+  // ===== 読み込み =====
+  function render(d) {
+    document.getElementById("updated").textContent = `データ更新：${d.updated}`;
+    measureWidth();
+    const quizState = document.getElementById("quizResult")?.textContent || "";
+    document.getElementById("app").innerHTML = ch1(d) + ch2(d) + ch3(d) + ch4(d) + ch5(d) + sourcesBlock(d);
+    setupQuiz(d);
+    if (quizState) restoreQuiz(d, quizState);
+  }
+
+  // 描き直したとき、クイズに答えた状態をもどす
+  function restoreQuiz(d, text) {
+    const answer = d.industry.major.slice().sort((a, b) => b.count - a.count)[0].name;
+    document.querySelectorAll("#quiz .choice").forEach(b => {
+      b.disabled = true;
+      if (b.dataset.name === answer) b.classList.add("correct");
+    });
+    document.getElementById("quizResult").textContent = text;
+    document.getElementById("ranking").hidden = false;
+  }
+
+  let current = null;
+  fetch(DATA_URL, { cache: "no-cache" })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => { current = d; render(d); })
+    .catch(() => {
+      document.getElementById("app").innerHTML = `
+        <div class="error">
+          <h2 style="font-size:1.125rem">データを読み込めませんでした</h2>
+          <p>このページは <code>${DATA_URL}</code> を読み込んで表示します。</p>
+          <p>パソコンでファイルをダブルクリックして開くと、ブラウザの安全のしくみでJSONが読み込めません。GitHub Pagesで公開したURLか、Codespacesのプレビューで開いてください。</p>
+        </div>`;
+    });
+
+  // 画面の幅が変わったら描き直す
+  let lastW = 0, timer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const w = document.getElementById("app").clientWidth;
+      if (current && Math.abs(w - lastW) > 20) { lastW = w; render(current); }
+    }, 200);
+  });
+
+  // 大きく表示
+  document.getElementById("bigBtn").addEventListener("click", e => {
+    const on = document.documentElement.classList.toggle("big");
+    e.currentTarget.setAttribute("aria-pressed", String(on));
+  });
+  // ダークモードの切り替えで色をかけ直す
+  if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => current && render(current));
+})();
+</script>
+</body>
+</html>
